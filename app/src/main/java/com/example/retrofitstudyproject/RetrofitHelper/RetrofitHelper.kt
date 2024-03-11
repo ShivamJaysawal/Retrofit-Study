@@ -5,7 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitHelper {
 
-    val BASE_URL="https://api.quotable.io"
+
+    val BASE_URL="https://identity-uat.canarahsbclife.com"
 
     fun getInstance() : Retrofit{
         return Retrofit.Builder()

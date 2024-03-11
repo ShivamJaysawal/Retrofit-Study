@@ -3,7 +3,7 @@ package com.example.retrofitstudyproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.retrofitstudyproject.RestAPIs.QuotesAPI
+import com.example.retrofitstudyproject.RestAPIs.QMS_APIs
 import com.example.retrofitstudyproject.RetrofitHelper.RetrofitHelper
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -14,12 +14,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val quotesAPI = RetrofitHelper.getInstance().create(QuotesAPI::class.java)
+        val qmsApis = RetrofitHelper.getInstance().create(QMS_APIs::class.java)
+
         GlobalScope.launch {
-            val result=quotesAPI.getQuotes(1)
+            val UserName = "QoBbyWkSFmSI87hFDHTlgs6v6T8a"
+            val Password = "cxm36wflZ8V0CetUU9HhqKRx4fwa"
+// Below code will create correct Base64 encoded Basic Auth credentials
+            val credentials = Credentials.basic(UserName, Password)
+            val result=qmsApis.getToken(credentials,"client_credentials")
+           val ss= result.body()?.access_token
             Log.d("QUOTERESULT",result.body().toString())
-
-
         }
     }
 }
